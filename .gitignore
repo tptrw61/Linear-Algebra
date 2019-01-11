@@ -1,0 +1,10 @@
+#
+*.exe
+*.out
+*.o
+*.obj
+obj
+#
+lib
+*.a
+*.lib

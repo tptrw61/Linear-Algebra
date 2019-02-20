@@ -17,3 +17,4 @@ Matrix.o: inc/Matrix.h src/Matrix.cpp inc/Rational.h Rational.o
 
 Rational.o: inc/Rational.h src/Rational.cpp
 	g++ -c -o Rational.o src/Rational.cpp
+

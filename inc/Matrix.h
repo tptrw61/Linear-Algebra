@@ -30,9 +30,26 @@ protected:
 	
 public:
 	
-	static bool printOn; //prints all steps when row reducing
-	static bool rowOpsOn; //prints all row operations when row reducing
+	static bool printOn; // = 0; //prints all steps when row reducing
+	static bool rowOpsOn; // = 0; //prints all row operations when row reducing
 	static FILE *printStream;
+	
+	/*
+	 * parameters for .inverse(), .triangular(), .ref(), .rref()
+	 * 
+	 * Default values:
+	 * printOn = 0;
+	 * rowOpsOn = 0;
+	 * 
+	 * SHOW_DEFAULT   : Use user's entered values for printOn and rowOpsOn
+	 * SHOW_NONE      : Print nothing
+	 * SHOW_MATRIX    : Print matrix steps and row operations
+	 * SHOW_ROW_OPS   : Print only row operations
+	 * 
+	 * displays matrix and row ops OR row ops OR neither without
+	 *     changing static variables printOn and rowOpsOn
+	 * printStream is the stream/file that disp() prints to, default is stdout
+	 */
 	
 	//MxN matrix (M by N)
 	const int& M = m;
@@ -69,9 +86,9 @@ public:
 	Matrix& rowScale(int row, const Rational& scalar, int print = -1);
 	Matrix& rowAdd(int rowStored, int rowScaled, const Rational& scalar, int print = -1); //rowStored -> rowStored + (scalar * rowScaled) 
 	
-	static Matrix zero(int rows, int columns); //todo
-	static Matrix identity(int rows, int columns); //todo
-	static Matrix fill(int rows, int columns, const Rational& r); //todo
+	static Matrix zero(int rows, int columns);
+	static Matrix identity(int rows, int columns);
+	static Matrix fill(int rows, int columns, const Rational& r);
 	
 	Rational det() const;
 	

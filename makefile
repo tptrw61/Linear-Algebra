@@ -12,9 +12,9 @@ clean:
 	-rm libMatrix.a Matrix.o Rational.o
 
 #real targets
-Matrix.o: inc/Matrix.h src/Matrix.cpp inc/Rational.h Rational.o
-	g++ -c -o Matrix.o src/Matrix.cpp
+Matrix.o: inc/Matrix.hpp src/Matrix.cpp inc/Rational.hpp Rational.o
+	g++ -c -Wall src/Matrix.cpp
 
-Rational.o: inc/Rational.h src/Rational.cpp
-	g++ -c -o Rational.o src/Rational.cpp
+Rational.o: inc/Rational.hpp src/Rational.cpp
+	g++ -c -Wall src/Rational.cpp
 

@@ -1,5 +1,5 @@
 #pragma once
-#include "../Matrix.h"
+#include "../Matrix.hpp"
 
 //
 bool isZeroMatrix(const Matrix& A);

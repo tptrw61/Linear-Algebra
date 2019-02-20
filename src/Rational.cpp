@@ -1,7 +1,7 @@
 /*
 Author: Timothy Williams
 */
-#include "../inc/Rational.h"
+#include "../inc/Rational.hpp"
 #include <stdexcept>
 
 using namespace std;
@@ -31,7 +31,7 @@ Rational& Rational::operator=(const Rational& rhs) {
 Rational Rational::operator+(const Rational& rhs) const {
 	if (this->D == 1 && rhs.D == 1)
 		return Rational(this->N + rhs.N);
-	1/this->D; 1/rhs.D; //error checking for divide by zero
+	if (1/this->D || 1/rhs.D); //error checking for divide by zero
 	long newD = lcm(this->D, rhs.D);
 	long leftNMult = newD / this->D;
 	long rightNMult = newD / rhs.D;
@@ -44,7 +44,7 @@ Rational Rational::operator+(const Rational& rhs) const {
 Rational Rational::operator*(const Rational& rhs) const {
 	if (this->D == 1 && rhs.D == 1)
 		return Rational(this->N * rhs.N);
-	1/this->D; 1/rhs.D; //error checking for divide by zero
+	if (1/this->D || 1/rhs.D); //error checking for divide by zero
 	Rational retval;
 	if (this->N == 0 || rhs.N == 0)
 		return retval;
@@ -89,11 +89,10 @@ double ceil(const Rational& r) {
 long gcf(long a, long b) {
 	if (a <= 0 || b <= 0)
 		return -1;
-	long n, d, q, r;
+	long n, d, r;
 	n = a; d = b;
 	while (true) {
 		r = n % d;
-		q = n / d;
 		//printf("%d=(%d)%d+(%d)\n", n, q, d, r);
 		if (r == 0)
 			return d;

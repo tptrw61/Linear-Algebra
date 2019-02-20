@@ -1,7 +1,7 @@
 /*
 Author: Timothy Williams
 */
-#include "../inc/Matrix.h"
+#include "../inc/Matrix.hpp"
 #include <stdexcept>
 #include <string>
 

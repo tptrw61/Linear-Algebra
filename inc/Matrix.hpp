@@ -9,8 +9,8 @@ Modified On: 11-7-2018
 
 #include <stdio.h>
 #include <initializer_list>
-#include "Array.h"
-#include "Rational.h"
+#include "Array.hpp"
+#include "Rational.hpp"
 
 #define SHOW_DEFAULT -1
 #define SHOW_NONE 0

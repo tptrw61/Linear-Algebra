@@ -77,7 +77,7 @@ public:
 	operator long() const { return N / D; };
 	operator int() const { return N / D; };
 	operator double() const { return (double)N / (double)D; };
-	operator bool() const { N / D; return N; };
+	operator bool() const { return N/D || N; };
 	
 	//unary
 	bool operator!() const { return !(bool)(*this); };

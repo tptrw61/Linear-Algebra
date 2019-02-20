@@ -29,10 +29,10 @@ Matrix::Matrix(initializer_list<initializer_list<Rational>> entries) {
 	int n = throwException ? 0 : entries.begin()[0].size();
 	if (!throwException && n == 0)
 		throwException = 1;
-	for (int i = 1; i < entries.size() && !throwException; i++) {
+	for (int i = 1; i < (int)entries.size() && !throwException; i++) {
 		if (entries.begin()[i].size() == 0) {
 			throwException |= 1;
-		} else if (entries.begin()[i].size() != n) {
+		} else if ((int)entries.begin()[i].size() != n) {
 			throwException |= 2;
 		}
 	}
@@ -59,10 +59,10 @@ Matrix::Matrix(MatrixArray entries) {
 	int n = throwException ? 0 : entries[0].size();
 	if (!throwException && n == 0)
 		throwException = 1;
-	for (int i = 1; i < entries.size() && !throwException; i++) {
+	for (int i = 1; i < (int)entries.size() && !throwException; i++) {
 		if (entries[i].size() == 0) {
 			throwException |= 1;
-		} else if (entries[i].size() != n) {
+		} else if ((int)entries[i].size() != n) {
 			throwException |= 2;
 		}
 	}
@@ -490,7 +490,7 @@ Matrix Matrix::inverse(int print) const {
 void Matrix::setRow(int row, initializer_list<Rational> entries) {
 	if (row > this->M || row <= 0)
 		throw invalid_argument("Dim error: arg 'row' out of range");
-	if (entries.size() != this->N)
+	if ((int)entries.size() != this->N)
 		throw invalid_argument("Dim error: args don't match dims");
 	this->ma[row-1] = entries;
 }
@@ -498,7 +498,7 @@ void Matrix::setRow(int row, initializer_list<Rational> entries) {
 void Matrix::setRow(int row, VectorArray entries) {
 	if (row > this->M || row <= 0)
 		throw invalid_argument("Dim error: arg 'row' out of range");
-	if (entries.size() != this->N)
+	if ((int)entries.size() != this->N)
 		throw invalid_argument("Dim error: args don't match dims");
 	this->ma[row-1] = entries;
 }
@@ -506,7 +506,7 @@ void Matrix::setRow(int row, VectorArray entries) {
 void Matrix::setColumn(int column, initializer_list<Rational> entries) {
 	if (column > this->N || column <= 0)
 		throw invalid_argument("Dim error: arg 'column' out of range");
-	if (entries.size() != this->M)
+	if ((int)entries.size() != this->M)
 		throw invalid_argument("Dim error: args don't match dims");
 	for (int i = 0; i < this->M; i++)
 		this->ma[i][column-1] = entries.begin()[i];
@@ -515,7 +515,7 @@ void Matrix::setColumn(int column, initializer_list<Rational> entries) {
 void Matrix::setColumn(int column, VectorArray entries) {
 	if (column > this->N || column <= 0)
 		throw invalid_argument("Dim error: arg 'column' out of range");
-	if (entries.size() != this->M)
+	if ((int)entries.size() != this->M)
 		throw invalid_argument("Dim error: args don't match dims");
 	for (int i = 0; i < this->M; i++)
 		this->ma[i][column-1] = entries[i];
@@ -531,7 +531,7 @@ VectorArray Matrix::getColumn(int column) const {
 	if (column > this->N || column <= 0)
 		throw invalid_argument("Dim error: arg 'column' out of range");
 	VectorArray retval(this->M);
-	for (int i = 0; i < retval.length(); i++)
+	for (int i = 0; i < (int)retval.length(); i++)
 		retval[i] = this->ma[i][column-1];
 	return retval;
 }

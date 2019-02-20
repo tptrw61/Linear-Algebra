@@ -1,5 +1,5 @@
-#ifndef RATIONAL_H
-#define RATIONAL_H
+#ifndef RATIONAL_HPP
+#define RATIONAL_HPP
 
 /*
 Author: Timothy Williams

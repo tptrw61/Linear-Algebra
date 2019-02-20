@@ -6,7 +6,7 @@
 #include <sstream>
 #include <ostream>
 
-#pragma warning(disable:4244) 
+//#pragma warning(disable:4244) //used for windows
 
 /*
 Author: Timothy Williams
@@ -91,7 +91,7 @@ template<class T>
 Array<T>::Array(std::initializer_list<T> il) {
 	this->m_length = il.size();
 	alloc();
-	for (int i = 0; i < this->m_length; i++)
+	for (uintmax_t i = 0; i < this->m_length; i++)
 		arr[i] = il.begin()[i];
 }
 
@@ -99,7 +99,7 @@ template<class T>
 Array<T>::Array(const Array<T>& other) {
 	m_length = other.m_length;
 	alloc();
-	for (int i = 0; i < m_length; i++)
+	for (uintmax_t i = 0; i < m_length; i++)
 		arr[i] = other.arr[i];
 }
 
@@ -120,7 +120,7 @@ Array<T>& Array<T>::operator=(const Array<T>& rhs) {
 	m_length = rhs.m_length;
 	dealloc();
 	alloc();
-	for (int i = 0; i < m_length; i++) {
+	for (uintmax_t i = 0; i < m_length; i++) {
 		arr[i] = rhs.arr[i];
 	}
 	return *this;
@@ -252,13 +252,14 @@ void Array<T>::sort(uintmax_t start, uintmax_t end) {
 		return;
 	if (start == end) //size == 1
 		return;
-	if (start == end - 1) //size == 2
+	if (start == end - 1) { //size == 2
 		if (arr[start] <= arr[end])
 			return;
 		else {
 			swap(arr[start], arr[end]);
 			return;
 		}
+	}
 	//pivot
 	uintmax_t lastSwap = (end + start) / 2;
 	if (arr[start] > arr[lastSwap])

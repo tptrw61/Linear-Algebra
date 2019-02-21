@@ -576,7 +576,9 @@ string Matrix::toString() const {
 			retval += spaces.substr(0, spaces.length() - strs[i][j].length()) + strs[i][j];
 		}
 		retval += "\n";
+		delete[] strs[i];
 	}
+	delete[] strs;
 	retval += "\n";
 	return retval;
 }

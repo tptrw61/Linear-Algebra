@@ -32,6 +32,12 @@ Matrix removeColumns(const Matrix& A, Array<int> pos);
 Matrix insertRows(const Matrix& A, const Matrix& ins, int pos);
 Matrix insertColumns(const Matrix& A, const Matrix& ins, int pos);
 
+//counts pivot positions
+int rank(const Matrix& A);
+
+//rows - rank
+int nullDim(const Matrix& A);
+
 //------------------------- definitions -------------------------
 
 bool isZeroMatrix(const Matrix& A) {
@@ -48,7 +54,7 @@ bool isZeroVector(const VectorArray& v) {
 	return 1;
 }
 
-Matrix pinv(Matrix& A, bool left) {
+Matrix pinv(const Matrix& A, bool left) {
 	return left ? pinv_left(A) : pinv_right(A);
 }
 
@@ -76,7 +82,7 @@ Matrix removeZeroRows(const Matrix& A) {
 	for (int r = 1; r <= A.M; r++) {
 		if (!isZeroVector(A.getRow(r))) {
 			keeps[r-1] = 1;
-			n++
+			n++;
 		} else {
 			keeps[r-1] = 0;
 		}
@@ -85,7 +91,7 @@ Matrix removeZeroRows(const Matrix& A) {
 		return A;
 	if (n == 0)
 		return Matrix::zero(1, A.N);
-	Matrix M(1, A.N);
+	Matrix M(n, A.N);
 	int i, r;
 	for (i = r = 1; r <= n; r++, i++) {
 		while (!keeps[i-1]) i++;
@@ -101,10 +107,12 @@ Matrix removeZeroColumns(const Matrix& A) {
 Matrix removeRows(const Matrix& A, Array<int> pos) {
 	pos.sort();
 	Array<int> posActual(pos.size());
+	for (int i = 0; i < (int)posActual.size(); i++)
+		posActual[i] = 0;
 	int n = 0;
-	for (int i = 0; i < pos.size(); i++) {
+	for (int i = 0; i < (int)pos.size(); i++) {
 		if (pos[i] < 1 || pos[i] > A.M)
-			n = A(i, 1); //gets error
+			n = A(pos[i], 1); //gets error
 		if (!posActual.in(pos[i]))
 			posActual[n++] = pos[i];
 	}
@@ -152,4 +160,22 @@ Matrix insertRows(const Matrix& A, const Matrix& ins, int pos) {
 Matrix insertColumns(const Matrix& A, const Matrix& ins, int pos) {
 	//fix this implementation
 	return insertRows(A.transpose(), ins.transpose(), pos).transpose();
+}
+
+int rank(const Matrix& A) {
+	Matrix R = A.M <= A.N ? A.ref(SHOW_NONE) : a.transpose().ref(SHOW_NONE);
+	int r, c, rank = 0;
+	int rowCt = A.M <= A.N ? A.M : A.N;
+	int colCt = A.M + A.N - rowCt;
+	for (r = c = 1; r <= rowCt && c <= colCt; r++, c++) {
+		while (c <= colCt && R(r, c).isZero())
+			c++;
+		if (c <= colCt)
+			rank++;
+	}
+	return rank;
+}
+
+int nullDim(const Matrix& A) {
+	return A.N - rank(A);
 }

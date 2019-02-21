@@ -222,7 +222,7 @@ Matrix& Matrix::rowSwap(int row1, int row2, int print) {
 		this->ma[row1-1][i] = this->ma[row2-1][i];
 		this->ma[row2-1][i] = temp;
 	}
-	if (Matrix::rowOpsOn || Matrix::printOn || print >= 1) fprintf(printStream, "R%d<->R%d\n", row1, row2);
+	if (print) fprintf(printStream, "R%d<->R%d\n", row1, row2);
 	return *this;
 }
 
@@ -235,7 +235,7 @@ Matrix& Matrix::rowScale(int row, const Rational& scalar, int print) {
 		this->ma[row-1][i] *= scalar;
 	if (scalar.isOne())
 		return *this;
-	if (Matrix::rowOpsOn || Matrix::printOn || print >= 1) fprintf(printStream, "R%d->%sR%d\n", row, scalar.isNegOne() ? "-" : scalar.toString().c_str(), row);
+	if (print) fprintf(printStream, "R%d->%sR%d\n", row, scalar.isNegOne() ? "-" : scalar.toString().c_str(), row);
 	return *this;
 }
 
@@ -248,7 +248,7 @@ Matrix& Matrix::rowAdd(int rowStored, int rowScaled, const Rational& scalar, int
 		throw invalid_argument("Dim error: arg 'rowScaled' out of range");
 	for (int i = 0; i < this->N; i++)
 		this->ma[rowStored-1][i] += scalar * this->ma[rowScaled-1][i];
-	if (Matrix::rowOpsOn || Matrix::printOn || print >= 1) fprintf(printStream, "R%d->R%d%s%sR%d\n", rowStored, rowStored, sign(scalar) == -1 ? "-" : "+", !abs(scalar).isOne() ? abs(scalar).toString().c_str() : "", rowScaled);
+	if (print) fprintf(printStream, "R%d->R%d%s%sR%d\n", rowStored, rowStored, sign(scalar) == -1 ? "-" : "+", !abs(scalar).isOne() ? abs(scalar).toString().c_str() : "", rowScaled);
 	return *this;
 }
 

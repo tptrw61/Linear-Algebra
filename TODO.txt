@@ -1,0 +1,29 @@
+-------------------------------------------------------------------------------
+
+Matrix:
+add insert/remove functions from ExtraOps to class
+overload ostream operator
+
+-------------------------------------------------------------------------------
+
+ExtraOps:
+add basis(...) function
+	returns a matrix containing the pivot columns of the given matrix
+add solve(...) function
+	solves equations of the form 'A*x=b' for 'x'
+add cVector(...) and rVector(...) functions
+	create column and row vectors as a matrix
+	should take 1d arrays
+
+-------------------------------------------------------------------------------
+
+Rational:
+move definitions to source file
+overload ostream operator
+
+-------------------------------------------------------------------------------
+
+Array:
+overload ostream operator
+
+-------------------------------------------------------------------------------
